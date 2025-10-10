@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2fdce;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-temple {
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: auto;
+}
+
+.login-temple h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-temple input[type="email"],
+.login-temple input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+.login-temple input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-temple input[type="submit"]:hover {
+  background-color: #45a049;
+}
