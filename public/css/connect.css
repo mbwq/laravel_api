@@ -44,3 +44,11 @@ body {
 .login-temple input[type="submit"]:hover {
   background-color: #45a049;
 }
+
+.login-temple a {
+  display: block;
+  text-align: center;
+  margin: 10px;
+  color: #4e5eca;
+  text-decoration: none;
+}
