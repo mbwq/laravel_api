@@ -14,7 +14,9 @@ class WelcomeController extends Controller
         return view('welcome', compact('produits'));
     }
 
-    public function welcome_produit() {
-        echo "page produit";
+    public function produit($id) {
+        //echo "page produit";
+        $produit = Produit::findOrFail($id);
+        return view('shop', compact('produit'));
     }
 }

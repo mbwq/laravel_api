@@ -15,6 +15,15 @@
         </nav>
 
         @yield('content')
+        
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Accueil</a>
+            <a href="#">À propos</a>
+            <a href="#">Contact</a>
+        </div><p>&copy; 2025 E-PSG. Tous droits réservés.</p>
+    </footer>
 
     </body>
 

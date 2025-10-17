@@ -7,7 +7,7 @@ use App\Http\Controllers\connexionController;
 
 Route::get('/', [WelcomeController::class, 'welcome_index'])->name('welcome.index');
 
-Route::get('/produit',[WelcomeController::class, 'welcome_produit']);
+Route::get('/produit/{id}',[WelcomeController::class, 'produit'])->name('welcome.produit');
 
 // Routes pour l'inscription
 Route::get('/inscription', [InscriptionController::class, 'inscription_index'])->name('inscription.index');
