@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Produit extends Model
 {
     //
-    /*public function getImageUrlAttribute() {
-        return Storage::url($this->photo_principale);
-    }*/
 }
