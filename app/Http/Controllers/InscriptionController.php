@@ -82,13 +82,6 @@ class InscriptionController extends Controller
             'token' => $token
         ]);
 
-
-
-        /*if (auth()->attempt($request->only(['email', 'password']))){
-
-        }else{
-
-        }*/
     }
 
 }
