@@ -28,7 +28,7 @@ return new class extends Migration
         Schema::table('produits', function (Blueprint $table) {
             //
             Schema::disableForeignKeyConstraints();
-            $table->dropForeign(['category_id']);
+            $table->dropForeign(['category_id']);// pour enlever la colonne ajout
         });
     }
 };
