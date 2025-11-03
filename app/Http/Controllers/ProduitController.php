@@ -23,7 +23,7 @@ class ProduitController extends Controller
         }*/
     }
     //trouver le produit
-    public function produit(Resquest $request, $id) {
+    public function produit(Request $request, $id) {
         $produit = Produit::findOrFail($id);
         return response()->json($produit);
     }

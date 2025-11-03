@@ -7,8 +7,8 @@
 @section('content')
 
    <div class="login-temple">
-    <h2>Connexion</h2>
-    <form action="{{ route('connexion.auth') }}" method="POST">
+    <h2>Connexion Admin</h2>
+    <form action="{{ route('connexion.admin') }}" method="POST">
         @csrf {{-- Sécurité Laravel obligatoire pour les formulaires POST --}}
         
         <label for="email">Email</label>

@@ -30,7 +30,7 @@
 
             <!-- Image du produit -->
             <img 
-              src="{{ asset('produits/' . $produit->photo_principale) }}" 
+              src="{{ asset('produits/' . $produit->photo_principale) }}"
               alt="{{ $produit->nom }}" 
               class="card-img-top produit-image"
             >

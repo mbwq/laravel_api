@@ -15,5 +15,12 @@ class Inscription extends Model
         'firstname',
         'email',
         'password',
+        'role',
     ];
+
+    public function commandes()
+    {
+        return $this->hasMany(Commande::class);
+    }
+
 }

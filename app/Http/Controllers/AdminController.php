@@ -55,4 +55,53 @@ class AdminController extends Controller
             'message' => 'admin deconnecter'
         ]);
     }
+
+    //pas touche code fonctionnel
+    public function storeAdmin(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:191',
+            'firstname' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:inscriptions',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $admin = Inscription::create([
+            'name' => $request->name,
+            'firstname' => $request->firstname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => 'admin',
+        ]);
+
+        return response()->json([
+            'status' => 201,
+            'admin' => $admin->only(['id', 'name', 'firstname', 'email'])
+        ], 201);
+    }
+
+    //pas touche code fonctionnel
+    public function deleteAdmin(Request $request, $id) {
+
+        $admin = Inscription::where('id', $id)->where('role', 'admin')->first();
+
+        if (! $admin) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Administrateur introuvable ou déjà supprimé'
+            ], 404);
+        }
+
+        $admin->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Administrateur supprimé avec succès'
+        ]);
+    }
+
+
 }

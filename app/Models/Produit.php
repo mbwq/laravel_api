@@ -21,7 +21,19 @@ class Produit extends Model
 
     //
     public function category() {
-        
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
+
+    public function articles()
+    {
+        return $this->hasMany(CommandeProduit::class);
+    }
+
+    public function commandes()
+    {
+        return $this->belongsToMany(Commande::class, 'commande_produits')
+                    ->withPivot('quantite', 'prix_unitaire')
+                    ->withTimestamps();
+    }
+
 }

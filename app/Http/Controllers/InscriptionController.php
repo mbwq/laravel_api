@@ -12,7 +12,6 @@ class InscriptionController extends Controller
     public function inscription_index()
     {
         return response()->json(Inscription::all());
-        //return response()->json(inscription_new::latest()->get());
     }
 
     public function inscription_new(Request $request)
@@ -24,7 +23,7 @@ class InscriptionController extends Controller
             'email' => 'required|string|email|max:191|unique:inscriptions',
             'password' => 'required|string|min:6|confirmed',
         ]);
-
+        //si le formulaire n'est pas valide
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
@@ -45,10 +44,13 @@ class InscriptionController extends Controller
         ]);
     }
 
-    public function liste($id) {
+    public function liste(Request $request) {
         //echo "page produit";
-        $inscription = Inscription::findOrFail($id);
-        return response()->json($inscription);
+        $user = $request->user();
+        return response()->json([
+            'status' => 200,
+            'user' => $user->only(['id', 'name', 'firstname','email'])
+        ]);
     }
 
     public function connexion_auth(Request $request) {
@@ -78,10 +80,55 @@ class InscriptionController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Connexion réussie',
-            'user' => $user,
+            'user' => $user->only(['id', 'name', 'email']),
             'token' => $token
         ]);
 
+    }
+
+    //deconnexion
+    public function logout(Request $request) {
+        request()->user()->tokens()->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'utilisateur deconnecter',
+        ]);
+    }
+
+    public function updateUsers(Request $request, $id) {
+        $inscription = inscription::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|required|string|max:191',
+            'firstname' => 'sometimes|required|string|max:191',
+            'email' => 'sometimes|required|string|email|max:191|unique:inscriptions,email,' . $id,
+            'password' => 'sometimes|string|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $inscription->update($validator->validated());
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Produit mis à jour avec succès',
+            'data' => $inscription->fresh()//permet de recharge les donnée
+        ]);
+    }
+
+    public function destroyUtilisateur(Request $request, $id) {
+        $inscription = Inscription::findOrFail($id);
+
+        $inscription->delete();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Utilisateur supprimé avec succès',
+            'produit' => $inscription
+        ]);
     }
 
 }
